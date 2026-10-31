@@ -30,8 +30,9 @@ It waits until enough providers answer consistently, and you choose how strict t
 
 ## Install
 
-Download the APK from the [Releases](../../releases) page, or build it yourself (see
-[docs/BUILDING.md](docs/BUILDING.md)). It needs Android 8.0 (API 26) or newer.
+Build it yourself (see [docs/BUILDING.md](docs/BUILDING.md)), or download the debug APK from the
+artifacts of the latest successful [CI run](../../actions). It needs Android 8.0 (API 26) or
+newer.
 
 ## Using it
 
