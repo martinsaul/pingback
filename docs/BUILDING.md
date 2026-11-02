@@ -22,6 +22,19 @@ sdk.dir=/path/to/android-sdk
 ./gradlew assembleRelease     # release APK (unsigned) -> app/build/outputs/apk/release/
 ```
 
+## Screenshots
+
+The images in `docs/screenshots` are rendered on the JVM with
+[Roborazzi](https://github.com/takahirom/roborazzi) and Robolectric, from fake monitor states in
+`app/src/test/java/io/saul/pingback/ui/ScreenshotTest.kt`. You don't need a device or emulator.
+After a UI change, re-render them with:
+
+```bash
+./gradlew recordScreenshots
+```
+
+A normal `testDebugUnitTest` run skips these tests.
+
 Install a debug build on a connected device:
 
 ```bash

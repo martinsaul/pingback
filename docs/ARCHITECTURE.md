@@ -81,3 +81,6 @@ Plain JVM unit tests in `app/src/test`:
   and recovery, streak resets, and switching networks.
 
 Run them with `./gradlew testDebugUnitTest`.
+
+`ui/ScreenshotTest` renders the README screenshots with Roborazzi on Robolectric. It runs only
+through `./gradlew recordScreenshots` (see [BUILDING.md](BUILDING.md#screenshots)).

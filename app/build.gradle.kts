@@ -42,6 +42,10 @@ android {
         buildConfig = true
     }
 
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+    }
+
     lint {
         abortOnError = true
         warningsAsErrors = false
@@ -63,4 +67,34 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
 
     testImplementation("junit:junit:4.13.2")
+
+    // Documentation screenshots, rendered on the JVM (see docs/BUILDING.md).
+    testImplementation(composeBom)
+    testImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    testImplementation("org.robolectric:robolectric:4.17")
+    testImplementation("io.github.takahirom.roborazzi:roborazzi:1.77.0")
+    testImplementation("io.github.takahirom.roborazzi:roborazzi-compose:1.77.0")
+}
+
+// `./gradlew recordScreenshots` re-renders the PNGs in docs/screenshots. A normal test run skips them.
+val screenshotDir = rootProject.layout.projectDirectory.dir("docs/screenshots").asFile.absolutePath
+tasks.withType<Test>().configureEach {
+    // Not project.hasProperty(): the recordScreenshots task itself would make that always true.
+    if (providers.gradleProperty("recordScreenshots").isPresent) {
+        systemProperty("pingback.screenshotDir", screenshotDir)
+        systemProperty("roborazzi.test.record", "true")
+    } else {
+        // Rendering is slow and only matters for the docs, so keep it out of normal test runs.
+        exclude("**/ScreenshotTest*")
+    }
+}
+tasks.register<Exec>("recordScreenshots") {
+    group = "documentation"
+    description = "Renders the README screenshots into docs/screenshots."
+    workingDir = rootProject.projectDir
+    commandLine(
+        "./gradlew", "--no-daemon", ":app:testDebugUnitTest",
+        "--tests", "io.saul.pingback.ui.ScreenshotTest", "-PrecordScreenshots", "--rerun",
+    )
 }

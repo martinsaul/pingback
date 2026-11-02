@@ -7,6 +7,12 @@ PingBack pings several well-known internet providers, your router (gateway), and
 servers your phone is using. It doesn't call your connection "back" because of one lucky reply.
 It waits until enough providers answer consistently, and you choose how strict that is.
 
+<p align="center">
+  <img src="docs/screenshots/offline.png" width="240" alt="PingBack showing Offline: the gateway and DNS server reply but no internet provider does">
+  &nbsp;
+  <img src="docs/screenshots/online.png" width="240" alt="PingBack showing Online: all four providers, the gateway and the DNS server reply">
+</p>
+
 ## Features
 
 - **One button.** Press play to start and stop to end. There is nothing to set up.
@@ -52,6 +58,13 @@ newer.
    notification.
 5. Press **stop** in the app, or **Stop** on the notification, to end monitoring.
 
+### Screenshots
+
+| Stopped | Offline | Coming back | Online |
+|---|---|---|---|
+| <img src="docs/screenshots/stopped.png" width="200" alt="Stopped, with the green play button"> | <img src="docs/screenshots/offline.png" width="200" alt="Offline: no provider replies, but the gateway and DNS server do, so the problem is past the router"> | <img src="docs/screenshots/recovering.png" width="200" alt="Coming back: three providers are building reply streaks toward the threshold"> | <img src="docs/screenshots/online.png" width="200" alt="Online: every provider has a long reply streak"> |
+| Press play to start. | The router and DNS server reply but no provider does, so the outage is past your router. | Three providers reply again and are building streaks (`3/5`). It isn't "back" until 2 of them reach 5. | The threshold is met. The "Internet is back" alert fired at the time shown. |
+
 Each row shows the latest round-trip time, the current reply streak against your threshold (for
 example `streak 3/5`), and the overall reply rate since you pressed play.
 
@@ -74,6 +87,8 @@ help you diagnose problems, because a router can answer while the internet behin
 ## Settings
 
 Tap the gear icon at the top right.
+
+<img src="docs/screenshots/settings.png" width="300" alt="Settings dialog with sliders for pings in a row, providers that must agree, and seconds between pings">
 
 | Setting | Default | Range | What it does |
 |---|---|---|---|
